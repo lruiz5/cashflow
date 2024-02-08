@@ -3,7 +3,7 @@ import React from "react";
 
 const TransactionsScreen = () => {
   return (
-    <View>
+    <View style={styles.container}>
       <Text>Transactions</Text>
     </View>
   );
@@ -11,4 +11,8 @@ const TransactionsScreen = () => {
 
 export default TransactionsScreen;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  container: {
+    paddingTop: "15%",
+  },
+});

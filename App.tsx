@@ -1,5 +1,7 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import * as eva from "@eva-design/eva";
+import { ApplicationProvider } from "@ui-kitten/components";
 import LoginScreen from "./screens/LoginScreen";
 import HomeScreen from "./screens/HomeScreen";
 import TransactionsScreen from "./screens/TransactionsScreen";
@@ -11,6 +13,7 @@ import { User, onAuthStateChanged } from "firebase/auth";
 import { FIREBASE_AUTH } from "./firebase/config";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import FontAwesome6Icons from "react-native-vector-icons/FontAwesome6";
+import { default as theme } from "./theme.json"; // <-- Import app theme
 
 const Tab = createBottomTabNavigator();
 
@@ -25,6 +28,7 @@ function MyTabs() {
         name="Home"
         component={HomeScreen}
         options={{
+          headerShown: false,
           tabBarLabel: "Budget",
           tabBarLabelStyle: { fontSize: 9 },
           tabBarIcon: ({ color, size }) => (
@@ -40,6 +44,7 @@ function MyTabs() {
         name="Transactions"
         component={TransactionsScreen}
         options={{
+          headerShown: false,
           tabBarLabel: "Transactions",
           tabBarLabelStyle: { fontSize: 9 },
           tabBarIcon: ({ color, size }) => (
@@ -55,6 +60,7 @@ function MyTabs() {
         name="Accounts"
         component={AccountsScreen}
         options={{
+          headerShown: false,
           tabBarLabel: "Accounts",
           tabBarLabelStyle: { fontSize: 9 },
           tabBarIcon: ({ color, size }) => (
@@ -66,6 +72,7 @@ function MyTabs() {
         name="Insights"
         component={InsightsScreen}
         options={{
+          headerShown: false,
           tabBarLabel: "Insights",
           tabBarLabelStyle: { fontSize: 9 },
           tabBarIcon: ({ color, size }) => (
@@ -77,6 +84,7 @@ function MyTabs() {
         name="Profile"
         component={ProfileScreen}
         options={{
+          headerShown: false,
           tabBarLabel: "Profile",
           tabBarLabelStyle: { fontSize: 9 },
           tabBarIcon: ({ color, size }) => (
@@ -109,28 +117,29 @@ export default function App() {
 
   useEffect(() => {
     onAuthStateChanged(FIREBASE_AUTH, (user) => {
-      console.log("user:", user);
       setUser(user);
     });
   }, []);
 
   return (
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName="Login">
-        {user ? (
-          <Stack.Screen
-            name="Inside"
-            component={MyTabs}
-            options={{ headerShown: false }}
-          />
-        ) : (
-          <Stack.Screen
-            options={{ headerShown: false }}
-            name="Login"
-            component={LoginScreen}
-          />
-        )}
-      </Stack.Navigator>
-    </NavigationContainer>
+    <ApplicationProvider {...eva} theme={{ ...eva.light, ...theme }}>
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName="Login">
+          {user ? (
+            <Stack.Screen
+              name="Inside"
+              component={MyTabs}
+              options={{ headerShown: false }}
+            />
+          ) : (
+            <Stack.Screen
+              options={{ headerShown: false }}
+              name="Login"
+              component={LoginScreen}
+            />
+          )}
+        </Stack.Navigator>
+      </NavigationContainer>
+    </ApplicationProvider>
   );
 }
