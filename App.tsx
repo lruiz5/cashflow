@@ -9,10 +9,88 @@ import ProfileScreen from "./screens/ProfileScreen";
 import { useEffect, useState } from "react";
 import { User, onAuthStateChanged } from "firebase/auth";
 import { FIREBASE_AUTH } from "./firebase/config";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import FontAwesome6Icons from "react-native-vector-icons/FontAwesome6";
+
+const Tab = createBottomTabNavigator();
 
 const Stack = createNativeStackNavigator();
 
 const InsideStack = createNativeStackNavigator();
+
+function MyTabs() {
+  return (
+    <Tab.Navigator>
+      <Tab.Screen
+        name="Home"
+        component={HomeScreen}
+        options={{
+          tabBarLabel: "Budget",
+          tabBarLabelStyle: { fontSize: 9 },
+          tabBarIcon: ({ color, size }) => (
+            <FontAwesome6Icons
+              name="money-bill-1-wave"
+              color={color}
+              size={size}
+            />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Transactions"
+        component={TransactionsScreen}
+        options={{
+          tabBarLabel: "Transactions",
+          tabBarLabelStyle: { fontSize: 9 },
+          tabBarIcon: ({ color, size }) => (
+            <FontAwesome6Icons
+              name="hand-holding-dollar"
+              color={color}
+              size={size}
+            />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Accounts"
+        component={AccountsScreen}
+        options={{
+          tabBarLabel: "Accounts",
+          tabBarLabelStyle: { fontSize: 9 },
+          tabBarIcon: ({ color, size }) => (
+            <FontAwesome6Icons name="landmark" color={color} size={size} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Insights"
+        component={InsightsScreen}
+        options={{
+          tabBarLabel: "Insights",
+          tabBarLabelStyle: { fontSize: 9 },
+          tabBarIcon: ({ color, size }) => (
+            <FontAwesome6Icons name="ranking-star" color={color} size={size} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Profile"
+        component={ProfileScreen}
+        options={{
+          tabBarLabel: "Profile",
+          tabBarLabelStyle: { fontSize: 9 },
+          tabBarIcon: ({ color, size }) => (
+            <FontAwesome6Icons
+              name="user-astronaut"
+              color={color}
+              size={size}
+            />
+          ),
+        }}
+      />
+    </Tab.Navigator>
+  );
+}
 
 function InsideLayout() {
   return (
@@ -42,7 +120,7 @@ export default function App() {
         {user ? (
           <Stack.Screen
             name="Inside"
-            component={InsideLayout}
+            component={MyTabs}
             options={{ headerShown: false }}
           />
         ) : (

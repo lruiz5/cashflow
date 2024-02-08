@@ -12,6 +12,7 @@
     "@react-native-async-storage/async-storage": "^1.21.0",
     "@react-native-firebase/app": "^18.7.3",
     "@react-native-firebase/auth": "^18.7.3",
+    "@react-navigation/bottom-tabs": "^6.5.11",
     "@react-navigation/native": "^6.1.9",
     "@react-navigation/native-stack": "^6.9.17",
     "@types/react": "~18.2.45",
@@ -21,6 +22,7 @@
     "react": "18.2.0",
     "react-native": "0.73.2",
     "react-native-dotenv": "^3.4.9",
+    "react-native-vector-icons": "^10.0.3",
     "typescript": "^5.3.0"
   },
   "devDependencies": {
