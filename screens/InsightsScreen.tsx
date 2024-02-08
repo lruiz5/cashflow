@@ -3,7 +3,7 @@ import React from "react";
 
 const InsightsScreen = () => {
   return (
-    <View>
+    <View style={styles.container}>
       <Text>Insights</Text>
     </View>
   );
@@ -11,4 +11,8 @@ const InsightsScreen = () => {
 
 export default InsightsScreen;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  container: {
+    paddingTop: "15%",
+  },
+});

@@ -3,7 +3,7 @@ import React from "react";
 
 const AccountsScreen = () => {
   return (
-    <View>
+    <View style={styles.container}>
       <Text>Accounts</Text>
     </View>
   );
@@ -11,4 +11,8 @@ const AccountsScreen = () => {
 
 export default AccountsScreen;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  container: {
+    paddingTop: "15%",
+  },
+});
